@@ -1,4 +1,9 @@
-;; my-packages.el
+;; my-packages.el --- Summary
+
+;;; Commentary:
+;;; 
+
+;;; Code:
 (require 'package)
 
 ;; set up the package repos
@@ -24,3 +29,6 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+(provide 'my-packages)
+;;; my-packages.el ends here
