@@ -1,2 +1,10 @@
-elpa
+## Non-source folders
+elpa/
+games/
+auto-save-list/
+
+abbrev_defs
+bookmarks
+
+## Emacs backups
 *~
