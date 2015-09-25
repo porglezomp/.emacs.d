@@ -13,10 +13,15 @@
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; list the requested packages
-(setq package-list
-  '(
-    ample-theme
-    ))
+(defvar package-list
+      '(ample-theme
+        company
+        flycheck
+        flycheck-haskell
+	merlin
+	rust-mode
+        flycheck-pos-tip
+        git-commit))
 
 ;; activate all the packages
 (package-initialize)
