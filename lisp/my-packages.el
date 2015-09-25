@@ -20,8 +20,7 @@
         flycheck-haskell
 	merlin
 	rust-mode
-        flycheck-pos-tip
-        git-commit))
+        flycheck-pos-tip))
 
 ;; activate all the packages
 (package-initialize)
@@ -33,7 +32,9 @@
 ;; install all the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
-    (package-install package)))
+    (condition-case nil
+        (package-install package)
+      (error (read-from-minibuffer (format "Package '%s' failed to install. (Enter) " package))))))
 
 (provide 'my-packages)
 ;;; my-packages.el ends here
