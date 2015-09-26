@@ -9,6 +9,8 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c r") 'org-capture)
+(global-set-key (kbd "C-c s") 'close-org-files)
+
 (setq org-log-done 'time)
 
 (setq org-directory "~/org/")
@@ -91,6 +93,27 @@
   (org-map-entries (lambda () (kill-whole-line)) "notitle"))
 
 (add-hook 'org-export-before-processing-hook #'org-remove-headlines)
+
+(defun filter (condp lst)
+  "Remove any element for which CONDP produces nil.  Produces a copy of LST."
+  (delq nil
+        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(defun buffer-with-file (file)
+  "Return the buffer that corresponds to the FILE path."
+  (catch 'break
+    (dolist (buffer (buffer-list))
+      (when (and (buffer-file-name buffer)
+                 (equal (abbreviate-file-name file)
+                        (abbreviate-file-name (buffer-file-name buffer))))
+          (throw 'break buffer)))))
+(mapcar #'buffer-with-file org-agenda-files)
+
+(defun close-org-files ()
+  "Close all of the org agenda files."
+  (interactive)
+  (dolist (file org-agenda-files)
+    (kill-buffer (buffer-with-file file))))
 
 (provide 'org-config)
 ;;; org-config.el ends here

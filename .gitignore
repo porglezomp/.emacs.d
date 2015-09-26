@@ -2,6 +2,7 @@
 elpa/
 games/
 auto-save-list/
+local-settings/
 
 abbrev_defs
 bookmarks

@@ -25,7 +25,7 @@
  '(haskell-literate-default (quote tex))
  '(org-agenda-files
    (quote
-    ("~/org/homework.org" "~/org/hw/OntologicalPaper.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
+    ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/hw/OntologicalPaper.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
  '(org-capture-templates
    (quote
     (("n" "Notes" entry
@@ -53,11 +53,9 @@
    (quote
     ((nil :maxlevel . 1)
      (org-agenda-files :maxlevel . 1))))
- '(org-time-stamp-custom-formats (quote ("<%m/%d/%y %a>" . "<%m/%d/%y %a %H:%M>")))
  '(safe-local-variable-values
    (quote
-    ((org-time-stamp-custom-formats "<%m %d>" . "<%Y-%m-%d>")
-     (org-time-stamp-custom-formats "<%m %d>" . "<%Y-%m-%d %H:%M>")))))
+    ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -69,7 +67,6 @@
  '(idris-semantic-function-face ((t (:inherit font-lock-function-name-face))))
  '(idris-semantic-type-face ((t (:inherit font-lock-preprocessor-face))))
  '(idris-warning-face ((t (:inherit warning :underline t))))
- '(italic ((t (:underline t))))
  '(warning ((t (:foreground "color-214" :weight bold)))))
 
 (setq-default indent-tabs-mode nil)
@@ -82,7 +79,7 @@
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
-    version-control t)       ; use versioned backups
+ version-control t)       ; use versioned backups
 
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 (global-set-key (kbd "C-c C-m") 'execute-extended-command)
