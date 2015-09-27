@@ -18,55 +18,32 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
+ '(custom-safe-themes (quote ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(haskell-literate-default (quote tex))
- '(org-agenda-files
-   (quote
-    ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/hw/OntologicalPaper.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
- '(org-capture-templates
-   (quote
-    (("n" "Notes" entry
-      (file+headline "~/org/notes.org" "Notes")
-      "")
-     ("t" "Todo" entry
-      (file+headline "~/org/todo.org" "Todo")
-      "* TODO %?
+ '(org-agenda-files (quote ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/hw/OntologicalPaper.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
+ '(org-capture-templates (quote (("n" "Notes" entry (file+headline "~/org/notes.org" "Notes") "") ("t" "Todo" entry (file+headline "~/org/todo.org" "Todo") "* TODO %?
   %U
-  %a")
-     ("h" "Homework" entry
-      (file+headline "~/org/homework.org" "Homework")
-      "* TODO %?
+  %a") ("h" "Homework" entry (file+headline "~/org/homework.org" "Homework") "* TODO %?
   %U
-  %a")
-     ("i" "Ideas" entry
-      (file+headline "~/org/ideas.org" "Ideas")
-      "* TODO %?
+  %a") ("i" "Ideas" entry (file+headline "~/org/ideas.org" "Ideas") "* TODO %?
   %U
   %a"))))
- '(org-modules
-   (quote
-    (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
- '(org-refile-targets
-   (quote
-    ((nil :maxlevel . 1)
-     (org-agenda-files :maxlevel . 1))))
- '(safe-local-variable-values
-   (quote
-    ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>")))))
+ '(org-list-allow-alphabetical t)
+ '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
+ '(org-refile-targets (quote ((nil :maxlevel . 1) (org-agenda-files :maxlevel . 1))))
+ '(safe-local-variable-values (quote ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(idris-prover-processed-face ((t (:background "color-22"))))
- '(idris-semantic-bound-face ((t (:inherit font-lock-constant-face))))
- '(idris-semantic-data-face ((t (:inherit font-lock-type-face))))
- '(idris-semantic-function-face ((t (:inherit font-lock-function-name-face))))
- '(idris-semantic-type-face ((t (:inherit font-lock-preprocessor-face))))
- '(idris-warning-face ((t (:inherit warning :underline t))))
+ '(idris-prover-processed-face ((t (:background "color-22"))) t)
+ '(idris-semantic-bound-face ((t (:inherit font-lock-constant-face))) t)
+ '(idris-semantic-data-face ((t (:inherit font-lock-type-face))) t)
+ '(idris-semantic-function-face ((t (:inherit font-lock-function-name-face))) t)
+ '(idris-semantic-type-face ((t (:inherit font-lock-preprocessor-face))) t)
+ '(idris-warning-face ((t (:inherit warning :underline t))) t)
  '(warning ((t (:foreground "color-214" :weight bold)))))
 
 (setq-default indent-tabs-mode nil)
@@ -89,11 +66,11 @@
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-;; Load required packages
+;; Load my custom config packages
 (require 'my-packages)
+(require 'company-config)
 (if (getenv "RUST_SRC_PATH")
     (require 'rust-environment))
-(require 'company-config)
 (require 'org-config)
 
 (load-theme 'ample)
