@@ -20,7 +20,8 @@
         flycheck-haskell
 	merlin
 	rust-mode
-        flycheck-pos-tip))
+        flycheck-pos-tip
+        org))
 
 ;; activate all the packages
 (package-initialize)

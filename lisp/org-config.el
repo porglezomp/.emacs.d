@@ -4,9 +4,7 @@
 ;;; Code:
 (require 'org)
 (when (< (string-to-number (org-version)) 8)
-  (unload-feature 'org)
-  (package-install 'org)
-  (defvar org-list-allow-alphabetical 't))
+  (error "Org-mode is out of date (%s). Update by installing `org` from elpa in emacs -q" (org-version)))
 (require 'org-inlinetask)
 (require 'org-habit)
 
