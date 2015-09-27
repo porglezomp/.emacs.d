@@ -109,13 +109,15 @@
                  (equal (abbreviate-file-name file)
                         (abbreviate-file-name (buffer-file-name buffer))))
           (throw 'break buffer)))))
-(mapcar #'buffer-with-file org-agenda-files)
+;; test code: (mapcar #'buffer-with-file org-agenda-files)
 
 (defun close-org-files ()
   "Close all of the org agenda files."
   (interactive)
   (dolist (file org-agenda-files)
-    (kill-buffer (buffer-with-file file))))
+    (let ((buffer (buffer-with-file file)))
+      (when buffer (kill-buffer buffer))))
+  (message "closed all org agenda buffers"))
 
 (provide 'org-config)
 ;;; org-config.el ends here
