@@ -111,9 +111,15 @@
           (throw 'break buffer)))))
 ;; test code: (mapcar #'buffer-with-file org-agenda-files)
 
+(defun is-agenda-buffer ()
+  "Return non-nil if the current buffer is in the the org-agenda-files list."
+  (member (abbreviate-file-name (buffer-file-name (current-buffer)))
+          (mapcar #'abbreviate-file-name org-agenda-files)))
+
 (defun close-org-files ()
   "Close all of the org agenda files."
   (interactive)
+  (save-some-buffers nil #'is-agenda-buffer)
   (dolist (file org-agenda-files)
     (let ((buffer (buffer-with-file file)))
       (when buffer (kill-buffer buffer))))
