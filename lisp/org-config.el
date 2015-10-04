@@ -31,7 +31,7 @@
                "\\documentclass[12pt]{article}
 
 \\usepackage{geometry}
-\\geometry{letterpaper, margin=0.75in}
+\\geometry{letterpaper, margin=0.95in}
 
 \\usepackage[utf8]{inputenc}
 \\usepackage{lmodern}
@@ -39,6 +39,13 @@
 \\usepackage{hyperref}
 \\usepackage{setspace}
 \\onehalfspacing
+
+\\usepackage{titling}
+\\pretitle{\\begin{center}\\singlespacing\\LARGE}
+\\posttitle{\\par\\end{center}\\vspace{-1.2em}}
+\\postauthor{\\end{tabular}\\par\\end{center}\\vspace{-1.5em}}
+\\setlength{\\droptitle}{-90pt}
+\\postdate{\\par\\end{center}\\doublespacing\\vspace{-2.5em}}
 
 \\usepackage{fixltx2e}
 
@@ -124,6 +131,10 @@
     (let ((buffer (buffer-with-file file)))
       (when buffer (kill-buffer buffer))))
   (message "closed all org agenda buffers"))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
 
 (provide 'org-config)
 ;;; org-config.el ends here

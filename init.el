@@ -7,7 +7,8 @@
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(setenv "PATH" (shell-command-to-string "source /etc/profile; source ~/.bash_profile; echo -n $PATH"))
+(when (file-exists-p "~/.bash_profile")
+  (setenv "PATH" (shell-command-to-string "source /etc/profile; source ~/.bash_profile; echo -n $PATH")))
 
 ;; No splash screen
 (setq inhibit-startup-message t)
@@ -18,32 +19,58 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
+ '(custom-safe-themes
+   (quote
+    ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(haskell-literate-default (quote tex))
- '(org-agenda-files (quote ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/hw/OntologicalPaper.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
- '(org-capture-templates (quote (("n" "Notes" entry (file+headline "~/org/notes.org" "Notes") "") ("t" "Todo" entry (file+headline "~/org/todo.org" "Todo") "* TODO %?
+ '(org-agenda-files
+   (quote
+    ("~/org/hw/odyssey-proposal.org" "~/org/humanities-notes.org" "~/org/homework.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
+ '(org-capture-templates
+   (quote
+    (("n" "Notes" entry
+      (file+headline "~/org/notes.org" "Notes")
+      "")
+     ("t" "Todo" entry
+      (file+headline "~/org/todo.org" "Todo")
+      "* TODO %?
   %U
-  %a") ("h" "Homework" entry (file+headline "~/org/homework.org" "Homework") "* TODO %?
+  %a")
+     ("h" "Homework" entry
+      (file+headline "~/org/homework.org" "Homework")
+      "* TODO %?
   %U
-  %a") ("i" "Ideas" entry (file+headline "~/org/ideas.org" "Ideas") "* TODO %?
+  %a")
+     ("i" "Ideas" entry
+      (file+headline "~/org/ideas.org" "Ideas")
+      "* TODO %?
   %U
   %a"))))
- '(org-list-allow-alphabetical t)
- '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
- '(org-refile-targets (quote ((nil :maxlevel . 1) (org-agenda-files :maxlevel . 1))))
- '(safe-local-variable-values (quote ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>")))))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
+ '(org-refile-targets
+   (quote
+    ((nil :maxlevel . 1)
+     (org-agenda-files :maxlevel . 1))))
+ '(safe-local-variable-values
+   (quote
+    ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>"))))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.zoho.com")
+ '(smtpmail-smtp-service 587))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(idris-prover-processed-face ((t (:background "color-22"))) t)
- '(idris-semantic-bound-face ((t (:inherit font-lock-constant-face))) t)
- '(idris-semantic-data-face ((t (:inherit font-lock-type-face))) t)
- '(idris-semantic-function-face ((t (:inherit font-lock-function-name-face))) t)
- '(idris-semantic-type-face ((t (:inherit font-lock-preprocessor-face))) t)
- '(idris-warning-face ((t (:inherit warning :underline t))) t)
+ '(idris-prover-processed-face ((t (:background "color-22"))))
+ '(idris-semantic-bound-face ((t (:inherit font-lock-constant-face))))
+ '(idris-semantic-data-face ((t (:inherit font-lock-type-face))))
+ '(idris-semantic-function-face ((t (:inherit font-lock-function-name-face))))
+ '(idris-semantic-type-face ((t (:inherit font-lock-preprocessor-face))))
+ '(idris-warning-face ((t (:inherit warning :underline t))))
  '(warning ((t (:foreground "color-214" :weight bold)))))
 
 (setq-default indent-tabs-mode nil)
@@ -75,6 +102,7 @@
 
 (load-theme 'ample)
 (electric-pair-mode)
+(show-paren-mode t)
 
 ;; HASKELL STUFF
 
