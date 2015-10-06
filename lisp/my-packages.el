@@ -21,7 +21,9 @@
 	merlin
 	rust-mode
         flycheck-pos-tip
-        org))
+        org
+        writegood-mode
+        artbollocks-mode))
 
 ;; activate all the packages
 (package-initialize)

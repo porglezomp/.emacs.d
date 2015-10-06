@@ -12,6 +12,7 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c r") 'org-capture)
 (global-set-key (kbd "C-c s") 'close-org-files)
+(global-set-key (kbd "C-c d") 'org-time-stamp-inactive)
 
 (setq org-log-done 'time)
 
