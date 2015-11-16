@@ -135,7 +135,40 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t)))
+ '((python . t)
+   (dot . t)))
+
+(defun count-words-org-section (arg)
+  "Count the number of words in an `org-mode' section.
+Accepts a prefix argument ARG."
+  (interactive "P")
+  (if arg
+      (message "%d words in top-level section" (count-words-top-level-section))
+    (message "%d words in section"(count-words-section))))
+
+(defun count-words-section ()
+  "Count the words within a single `org-mode' section or subsection."
+  (let ((position (point)))
+    (outline-previous-visible-heading 1)
+    (let ((start (point)))
+      (outline-next-visible-heading 1)
+      (let* ((end (point)) (count (count-words-region start end)))
+        (goto-char position)
+        count))))
+
+(defun count-words-top-level-section ()
+  "Count the words in a top level `org-mode' section."
+  (let ((position (point)))
+    (outline-up-heading 10000)
+    (let ((start (point)))
+      (org-forward-heading-same-level 1)
+      (when (= start (point))
+        (goto-char (point-max)))
+      (let* ((end (point)) (count (count-words-region start end)))
+        (goto-char position)
+        count))))
+
+(global-set-key (kbd "C-c v") 'count-words-org-section)
 
 (provide 'org-config)
 ;;; org-config.el ends here

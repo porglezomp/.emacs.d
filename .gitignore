@@ -3,9 +3,11 @@ elpa/
 games/
 auto-save-list/
 local-settings/
+tutorial/
 
 abbrev_defs
 bookmarks
 
 ## Emacs backups
 *~
+\#*#

@@ -26,10 +26,13 @@
  '(haskell-literate-default (quote tex))
  '(org-agenda-files
    (quote
-    ("~/org/hw/odyssey-proposal.org" "~/org/humanities-notes.org" "~/org/homework.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/collegeapp.org" "~/org/todo.org" "~/org/notes.org")))
+    ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/todo.org" "~/org/notes.org")))
  '(org-capture-templates
    (quote
-    (("n" "Notes" entry
+    (("w" "Weight" table-line
+      (file "~/org/weight.org")
+      "| %U | %? | |")
+     ("n" "Notes" entry
       (file+headline "~/org/notes.org" "Notes")
       "")
      ("t" "Todo" entry
@@ -47,19 +50,22 @@
       "* TODO %?
   %U
   %a"))))
- '(org-latex-pdf-process
-   (quote
-    ("xelatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "xelatex -interaction nonstopmode -output-directory %o %f" "xelatex -interaction nonstopmode -output-directory %o %f")))
+ '(org-latex-pdf-process (quote ("latexmk -g -pdf %f")))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
+ '(org-publish-project-alist
+   (quote
+    (("site" :base-directory "~/porglezomp.github.io" :publishing-function org-html-publish-to-html :publishing-directory "~/porglezomp.github.io/_site"))))
  '(org-refile-targets
    (quote
     ((nil :maxlevel . 1)
      (org-agenda-files :maxlevel . 1))))
  '(safe-local-variable-values
    (quote
-    ((org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>"))))
+    ((org-confirm-babel-evaluate)
+     (org-babel-inline-result-wrap . "$%s$")
+     (org-time-stamp-custom-formats "<%b %e>" . "<%Y-%m-%d %H:%M>"))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.zoho.com")
  '(smtpmail-smtp-service 587))
@@ -93,6 +99,14 @@
 (global-set-key (kbd "C-c C-f") 'find-file-at-point)
 (global-set-key (kbd "C-c c") 'compile)
 
+(defun run-python-file ()
+  "Run the current buffer as 'python <filename>'."
+  (interactive)
+  (when (buffer-file-name (current-buffer))
+    (compile (format "python %s" (buffer-file-name (current-buffer))))))
+
+(global-set-key (kbd "C-c p") 'run-python-file)
+
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -106,6 +120,8 @@
 (load-theme 'ample)
 (electric-pair-mode)
 (show-paren-mode t)
+(column-number-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
 
 ;; HASKELL STUFF
 
