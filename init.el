@@ -24,6 +24,7 @@
     ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(haskell-literate-default (quote tex))
+ '(ido-enable-flex-matching t)
  '(org-agenda-files
    (quote
     ("~/org/humanities-notes.org" "~/org/homework.org" "~/org/habits.org" "~/org/contacts.org" "~/org/ideas.org" "~/org/todo.org" "~/org/notes.org")))
@@ -117,6 +118,9 @@
     (require 'rust-environment))
 (require 'org-config)
 
+(require 'ido)
+(ido-mode t)
+
 (load-theme 'ample)
 (electric-pair-mode)
 (show-paren-mode t)
@@ -130,8 +134,8 @@
 
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(eval-after-load 'flycheck
-  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+(require 'flycheck-tip)
+(flycheck-tip-use-timer 'verbose)
 
 ;;(eval-after-load 'flycheck
 ;;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))

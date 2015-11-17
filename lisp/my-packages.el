@@ -20,7 +20,7 @@
         flycheck-haskell
 	merlin
 	rust-mode
-        flycheck-pos-tip
+        flycheck-tip
         org
         writegood-mode
         artbollocks-mode))

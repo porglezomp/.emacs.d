@@ -8,6 +8,8 @@ tutorial/
 abbrev_defs
 bookmarks
 
+ido.last
+
 ## Emacs backups
 *~
 \#*#
