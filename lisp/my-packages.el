@@ -23,7 +23,8 @@
         flycheck-tip
         org
         writegood-mode
-        artbollocks-mode))
+        artbollocks-mode
+        elpy))
 
 ;; activate all the packages
 (package-initialize)

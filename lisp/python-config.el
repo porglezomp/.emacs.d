@@ -11,5 +11,12 @@
 
 (global-set-key (kbd "C-c p") 'run-python-file)
 
+(require 'elpy)
+(elpy-enable)
+(setq elpy-rpc-backend "jedi")
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode 'flycheck-mode))
+
 (provide 'python-config)
 ;;; python-config.el ends here

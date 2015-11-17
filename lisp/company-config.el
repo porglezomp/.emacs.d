@@ -14,6 +14,7 @@
 
 (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+(setq company-auto-complete 'company-explicit-action-p)
 
 (provide 'company-config)
 ;;; company-config.el ends here
