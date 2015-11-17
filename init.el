@@ -100,14 +100,6 @@
 (global-set-key (kbd "C-c C-f") 'find-file-at-point)
 (global-set-key (kbd "C-c c") 'compile)
 
-(defun run-python-file ()
-  "Run the current buffer as 'python <filename>'."
-  (interactive)
-  (when (buffer-file-name (current-buffer))
-    (compile (format "python %s" (buffer-file-name (current-buffer))))))
-
-(global-set-key (kbd "C-c p") 'run-python-file)
-
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -117,6 +109,7 @@
 (if (getenv "RUST_SRC_PATH")
     (require 'rust-environment))
 (require 'org-config)
+(require 'python-config)
 
 (require 'ido)
 (ido-mode t)
@@ -140,10 +133,6 @@
 ;;(eval-after-load 'flycheck
 ;;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 (global-set-key (kbd "C-c ! !") 'flycheck-first-error)
-
-(eval-after-load 'flycheck
-  '(custom-set-variables
-    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 (require 'merlin)
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
