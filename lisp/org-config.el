@@ -27,6 +27,26 @@
 
 (require 'ox-latex)
 
+(defun custom-org-setup ()
+  "Setup org."
+  (local-set-key (kbd "C-c t") #'org-show-todo-tree)
+  (local-set-key (kbd "C-c (") #'reftex-citation))
+
+(add-hook 'org-mode-hook 'reftex-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+;; (add-hook 'org-mode-hook 'flyspell-buffer)
+(defun check-writing ()
+  "Toggle `artbollocks-mode' and `writegood-mode' to check writing, then re-fontify the buffer."
+  (interactive)
+  (defvar artbollocks-mode nil)
+  (defvar writegood-mode nil)
+  
+  (let ((status (not (and writegood-mode artbollocks-mode))))
+    (artbollocks-mode status)
+    (writegood-mode status)
+    (font-lock-fontify-buffer)))
+(global-set-key (kbd "C-c w") 'check-writing)
+
 (add-to-list 'org-latex-classes
              '("myarticle"
                "\\documentclass[12pt]{article}
@@ -90,8 +110,6 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-(global-set-key (kbd "C-c t") #'org-show-todo-tree)
 
 (defun org-remove-headlines (backend)
   "Remove headlines with :notitle: tag."

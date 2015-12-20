@@ -11,10 +11,10 @@
 (setq company-idle-delay 0.2)
 ;; Reduce the number of characters before company appears
 (setq company-minimum-prefix-length 1)
+(add-hook 'text-mode-hook (lambda () (setq company-idle-delay 1.0)))
 
 (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-(setq company-auto-complete 'company-explicit-action-p)
 
 (provide 'company-config)
 ;;; company-config.el ends here

@@ -19,10 +19,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-auto-complete t)
  '(custom-safe-themes
    (quote
     ("4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
+ '(elpy-test-nose-runner-command
+   (quote
+    ("nosetests" "--with-doctest" "--with-coverage" "--rednose")))
+ '(elpy-test-pytest-runner-command (quote ("py.test" "--doctest-modules")))
+ '(elpy-test-runner (quote elpy-test-pytest-runner))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(haskell-literate-default (quote tex))
  '(ido-enable-flex-matching t)
@@ -111,6 +115,7 @@
     (require 'rust-environment))
 (require 'org-config)
 (require 'python-config)
+(setq company-auto-complete #'company-explicit-action-p)
 
 (require 'ido)
 (ido-mode t)
@@ -152,6 +157,21 @@
 (let ((local-settings "~/.emacs.d/local-settings/local-settings.el"))
   (if (file-exists-p local-settings)
       (load local-settings)))
+
+(ignore-errors
+  (require 'ansi-color)
+  (defun my-colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
+
+(defun linum-format-func (line)
+  (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
+    (propertize (format (format "%%%dd " w) line) 'face 'linum)))
+(setq linum-format 'linum-format-func)
+
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 (provide 'init)
 ;;; init.el ends here
