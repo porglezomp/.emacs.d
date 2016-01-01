@@ -111,6 +111,39 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+(add-to-list 'org-latex-classes
+             '("paper"
+               "\\documentclass[12pt]{article}
+
+\\usepackage{geometry}
+\\geometry{letterpaper, margin=1.0in}
+
+\\usepackage[utf8]{inputenc}
+\\usepackage{lmodern}
+\\usepackage[T1]{fontenc}
+\\usepackage{hyperref}
+\\usepackage{setspace}
+\\onehalfspacing
+
+\\usepackage{titling}
+\\pretitle{\\begin{center}\\singlespacing\\LARGE}
+\\posttitle{\\par\\end{center}\\vspace{-1.2em}}
+\\postauthor{\\end{tabular}\\par\\end{center}\\vspace{-1.5em}}
+\\setlength{\\droptitle}{-90pt}
+\\postdate{\\par\\end{center}\\doublespacing\\vspace{-2.5em}}
+
+\\usepackage{fixltx2e}
+
+               [NO-DEFAULT-PACKAGES]
+               [NO-PACKAGES]
+               [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
 (defun org-remove-headlines (backend)
   "Remove headlines with :notitle: tag."
   (org-map-entries (lambda () (let ((beg (point)))

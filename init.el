@@ -173,5 +173,12 @@
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
+(defun elm-compile-encoding (msg)
+   (concat "LANG=en_US.UTF-8 " msg))
+(add-function :filter-return (symbol-function 'elm-compile--command) #'elm-compile-encoding)
+
+(put 'narrow-to-region 'disabled nil)
+
 (provide 'init)
 ;;; init.el ends here
+
